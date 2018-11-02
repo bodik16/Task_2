@@ -13,13 +13,6 @@
 
         private Predicate<object> canExecute;
 
-        private event EventHandler CanExecuteChangedInternal;
-
-        public RelayCommand(Action<object> execute)
-            : this(execute, DefaultCanExecute)
-        {
-        }
-
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             if (execute == null)
@@ -34,6 +27,10 @@
 
             this.execute = execute;
             this.canExecute = canExecute;
+        }
+
+        public RelayCommand(Action<object> execute) : this(execute, DefaultCanExecute)
+        {
         }
 
         public event EventHandler CanExecuteChanged
@@ -51,6 +48,8 @@
             }
         }
 
+        private event EventHandler CanExecuteChangedInternal;
+
         public bool CanExecute(object parameter)
         {
             return this.canExecute != null && this.canExecute(parameter);
@@ -66,7 +65,7 @@
             EventHandler handler = this.CanExecuteChangedInternal;
             if (handler != null)
             {
-                //DispatcherHelper.BeginInvokeOnUIThread(() => handler.Invoke(this, EventArgs.Empty));
+                // DispatcherHelper.BeginInvokeOnUIThread(() => handler.Invoke(this, EventArgs.Empty));
                 handler.Invoke(this, EventArgs.Empty);
             }
         }
