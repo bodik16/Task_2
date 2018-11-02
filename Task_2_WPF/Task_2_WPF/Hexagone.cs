@@ -4,13 +4,15 @@
     using System.Windows.Media;
     using System.Windows.Shapes;
 
-    class Hexagone
+    [Serializable]
+    public class Hexagone
     {
-        private readonly int vertices_number = 6;
+        private readonly int verticesNumber = 6;
         private PointCollection points;
 
         public Hexagone()
-        { }
+        {
+        }
 
         public Hexagone(Polygon figure)
         {
@@ -24,17 +26,18 @@
             {
                 return this.points;
             }
+
             set
             {
-                if (value.Count != this.vertices_number)
+                if (value.Count != this.verticesNumber)
                 {
                     throw new ArgumentException("Number of points must be 6");
                 }
+
                 this.points = value;
             }
         }
-        public Color HexagoneColor { get; set; }
 
- 
+        public Color HexagoneColor { get; set; }
     }
 }
