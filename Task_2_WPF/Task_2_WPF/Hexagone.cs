@@ -6,31 +6,35 @@
 
     class Hexagone
     {
-        private readonly int VERTICES_NUMBER = 6;
+        private readonly int vertices_number = 6;
         private PointCollection points;
+
+        public Hexagone()
+        { }
+
+        public Hexagone(Polygon figure)
+        {
+            this.Points = figure.Points;
+            this.HexagoneColor = (figure.Fill as SolidColorBrush).Color;
+        }
+
         public PointCollection Points
         {
             get
             {
-                return points;
+                return this.points;
             }
             set
             {
-                if (value.Count != VERTICES_NUMBER)
+                if (value.Count != this.vertices_number)
                 {
                     throw new ArgumentException("Number of points must be 6");
                 }
-                points = value;
+                this.points = value;
             }
         }
         public Color HexagoneColor { get; set; }
 
-        public Hexagone() { }
-
-        public Hexagone(Polygon figure)
-        {
-            Points = figure.Points;
-            HexagoneColor = (figure.Fill as SolidColorBrush).Color;
-        }
+ 
     }
 }
